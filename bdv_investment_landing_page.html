@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inversión BDV - Gana 5,000 Bs</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        bdvBlue: '#003366',
+                        bdvLightBlue: '#0055A5',
+                        bdvGold: '#D4AF37',
+                        bdvGreen: '#10B981',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #002244 0%, #004488 100%);
+        }
+        .card-glow {
+            box-shadow: 0 10px 30px -10px rgba(0, 85, 165, 0.3);
+        }
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 3s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-cyan-500 selection:text-white">
+
+    <!-- Top Notification Bar -->
+    <header class="bg-emerald-600/90 text-white text-xs font-medium py-2 px-4 text-center sticky top-0 z-50 shadow-md">
+        <i class="fa-solid fa-gift mr-1 animate-bounce"></i> ¡Bono de bienvenida! Descarga y cumple los requisitos para ganar <strong>5.000 Bs</strong>
+    </header>
+
+    <!-- Main Container -->
+    <main class="w-full max-w-md mx-auto flex-grow flex flex-col px-4 py-6 space-y-6">
+
+        <!-- Brand Header / Logo -->
+        <div class="flex items-center justify-between bg-slate-800/80 backdrop-blur-md p-4 rounded-2xl border border-slate-700">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center text-white font-black text-xl shadow-lg">
+                    <i class="fa-solid fa-building-columns"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-base text-white tracking-wide">Banco de Venezuela</h1>
+                    <p class="text-xs text-cyan-400 font-medium">Plataforma de Inversión Oficial</p>
+                </div>
+            </div>
+            <div class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs px-2.5 py-1 rounded-full font-semibold">
+                <i class="fa-solid fa-shield-halved mr-1"></i> Verificado
+            </div>
+        </div>
+
+        <!-- Hero Banner Card -->
+        <section class="hero-gradient rounded-3xl p-6 text-white card-glow relative overflow-hidden border border-blue-500/30">
+            <!-- Background Decorative Elements -->
+            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-blue-500/20 rounded-full blur-2xl pointer-events-none"></div>
+            
+            <div class="relative z-10 space-y-4">
+                <div class="inline-flex items-center space-x-2 bg-amber-400/20 border border-amber-400/40 text-amber-300 text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider">
+                    <i class="fa-solid fa-bolt text-amber-400"></i> Oportunidad Exclusiva
+                </div>
+                
+                <h2 class="text-2xl sm:text-3xl font-extrabold leading-tight tracking-tight">
+                    Haz crecer tu capital con tu cuenta <span class="text-cyan-300">BDV</span>
+                </h2>
+                
+                <p class="text-sm text-slate-300 leading-relaxed">
+                    Invierte de manera segura y rentable. Solo necesitas un saldo mínimo a partir de <strong class="text-white font-bold bg-blue-900/60 px-1.5 py-0.5 rounded border border-blue-400/30">50.000 Bs</strong> en tu cuenta del Banco de Venezuela.
+                </p>
+
+                <!-- Reward Highlight Box -->
+                <div class="bg-gradient-to-r from-emerald-900/80 to-slate-900/90 border border-emerald-500/40 rounded-2xl p-4 flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500 text-slate-950 flex items-center justify-center text-2xl font-black shrink-0 shadow-lg">
+                        <i class="fa-solid fa-coins"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-emerald-300 font-semibold uppercase tracking-wider">Bono Directo</div>
+                        <div class="text-lg font-black text-white">+5.000 Bs <span class="text-xs font-normal text-slate-300">de recompensa</span></div>
+                        <div class="text-[11px] text-slate-400">Al descargar, registrarte y cumplir condiciones.</div>
+                    </div>
+                </div>
+
+                <!-- Call To Action Button -->
+                <div class="pt-2">
+                    <button onclick="handleDownload()" class="w-full bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extxl font-bold py-4 px-6 rounded-2xl shadow-xl hover:shadow-emerald-500/25 transition-all transform active:scale-95 flex items-center justify-center space-x-2 text-base animate-pulse-slow">
+                        <span>Descargar y Reclamar 5.000 Bs</span>
+                        <i class="fa-solid fa-arrow-right-long"></i>
+                    </button>
+                    <p class="text-center text-[10px] text-slate-400 mt-2">
+                        <i class="fa-solid fa-lock mr-1"></i> Transacción protegida y cifrada SSL
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Requirements Section -->
+        <section class="bg-slate-800/80 backdrop-blur-md rounded-2xl p-5 border border-slate-700 space-y-4">
+            <h3 class="font-bold text-sm text-slate-200 uppercase tracking-wider flex items-center">
+                <i class="fa-solid fa-list-check text-cyan-400 mr-2"></i> Requisitos para Invertir
+            </h3>
+            
+            <div class="space-y-3">
+                <div class="flex items-start space-x-3 bg-slate-900/50 p-3 rounded-xl border border-slate-800">
+                    <div class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">1</div>
+                    <div class="text-xs text-slate-300">
+                        <strong class="text-white block font-semibold mb-0.5">Cuenta BDV Activa</strong>
+                        Poseer cuenta corriente o de ahorros en el Banco de Venezuela.
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-3 bg-slate-900/50 p-3 rounded-xl border border-slate-800">
+                    <div class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">2</div>
+                    <div class="text-xs text-slate-300">
+                        <strong class="text-white block font-semibold mb-0.5">Saldo Mínimo de 50.000 Bs</strong>
+                        Disponer de un saldo igual o superior a 50.000 Bs en la cuenta para activar el perfil de inversionista.
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-3 bg-slate-900/50 p-3 rounded-xl border border-slate-800">
+                    <div class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">3</div>
+                    <div class="text-xs text-slate-300">
+                        <strong class="text-white block font-semibold mb-0.5">Instalación y Verificación</strong>
+                        Descargar la aplicación oficial desde este portal y completar el registro seguro.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Steps Guide -->
+        <section class="bg-slate-800/80 backdrop-blur-md rounded-2xl p-5 border border-slate-700 space-y-4">
+            <h3 class="font-bold text-sm text-slate-200 uppercase tracking-wider flex items-center">
+                <i class="fa-solid fa-shoe-prints text-amber-400 mr-2"></i> ¿Cómo participar?
+            </h3>
+            
+            <div class="grid grid-cols-3 gap-3 text-center">
+                <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800 flex flex-col items-center">
+                    <div class="w-9 h-9 rounded-full bg-blue-600/20 text-blue-400 flex items-center justify-center text-sm font-bold mb-2">
+                        <i class="fa-solid fa-download"></i>
+                    </div>
+                    <span class="text-[11px] font-semibold text-white block mb-1">1. Descarga</span>
+                    <span class="text-[10px] text-slate-400 leading-tight">Instala la app en tu móvil</span>
+                </div>
+
+                <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800 flex flex-col items-center">
+                    <div class="w-9 h-9 rounded-full bg-amber-600/20 text-amber-400 flex items-center justify-center text-sm font-bold mb-2">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <span class="text-[11px] font-semibold text-white block mb-1">2. Verifica</span>
+                    <span class="text-[10px] text-slate-400 leading-tight">Confirma tus 50k+ Bs</span>
+                </div>
+
+                <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800 flex flex-col items-center">
+                    <div class="w-9 h-9 rounded-full bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-sm font-bold mb-2">
+                        <i class="fa-solid fa-gift"></i>
+                    </div>
+                    <span class="text-[11px] font-semibold text-white block mb-1">3. Gana</span>
+                    <span class="text-[10px] text-slate-400 leading-tight">Recibe tus 5.000 Bs</span>
+                </div>
+            </div>
+
+            <button onclick="handleDownload()" class="w-full bg-slate-700 hover:bg-slate-600 text-white font-semibold py-3 px-4 rounded-xl text-xs transition border border-slate-600 flex items-center justify-center space-x-2">
+                <span>Comenzar Ahora</span>
+                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </button>
+        </section>
+
+        <!-- Trust & Security Indicators -->
+        <div class="flex items-center justify-center space-x-6 py-2 text-slate-400 text-xs">
+            <div class="flex items-center space-x-1.5">
+                <i class="fa-solid fa-shield text-emerald-400"></i>
+                <span>Fondos Seguros</span>
+            </div>
+            <div class="flex items-center space-x-1.5">
+                <i class="fa-solid fa-bolt text-amber-400"></i>
+                <span>Acreditación Rápida</span>
+            </div>
+            <div class="flex items-center space-x-1.5">
+                <i class="fa-solid fa-headset text-cyan-400"></i>
+                <span>Soporte 24/7</span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-800 py-4 px-4 text-center text-xs text-slate-500 space-y-1">
+        <p>© 2026 Banco de Venezuela - Todos los derechos reservados.</p>
+        <p class="text-[10px] text-slate-600">Promoción sujeta a términos y condiciones de inversión digital.</p>
+    </footer>
+
+    <!-- Custom Modal for Alerts/Messages (No alert() used) -->
+    <div id="customModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-800 border border-slate-700 rounded-3xl p-6 max-w-sm w-full text-center space-y-4 shadow-2xl">
+            <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-3xl">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h4 id="modalTitle" class="text-lg font-bold text-white">Redirigiendo a Descarga</h4>
+            <p id="modalText" class="text-xs text-slate-300 leading-relaxed">
+                Preparando el instalador oficial de inversión BDV. Asegúrate de tener tu cuenta lista con más de 50.000 Bs para reclamar tus 5.000 Bs de bono.
+            </p>
+            <button onclick="closeModal()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl text-xs transition">
+                Continuar
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        function handleDownload() {
+            const modal = document.getElementById('customModal');
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('customModal');
+            modal.classList.add('hidden');
+            // Mock simulation of download action or deep link
+            // window.location.href = "#download";
+        }
+    </script>
+</body>
+</html>
