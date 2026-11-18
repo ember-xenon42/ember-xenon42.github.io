@@ -225,18 +225,20 @@
     </div>
 
     <!-- JavaScript Logic -->
-    <script>
-        function handleDownload() {
-            const modal = document.getElementById('customModal');
-            modal.classList.remove('hidden');
-        }
+    <!-- JavaScript Logic -->
+<script>
+    // 真实跳转的目标地址，按需修改
+    const REDIRECT_URL = "https://baidu.com";
 
-        function closeModal() {
-            const modal = document.getElementById('customModal');
-            modal.classList.add('hidden');
-            // Mock simulation of download action or deep link
-            // window.location.href = "#download";
-        }
-    </script>
-</body>
-</html>
+    function handleDownload() {
+        const modal = document.getElementById('customModal');
+        modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('customModal');
+        modal.classList.add('hidden');
+        // 真实跳转：当前页面导航到 REDIRECT_URL
+        window.location.href = REDIRECT_URL;
+    }
+</script>
