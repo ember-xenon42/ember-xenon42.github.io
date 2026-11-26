@@ -784,7 +784,7 @@
 
         // 商店跳转模拟状态反馈
         function handleStoreClick(event, storeName) {
-            event.preventDefault();
+            //event.preventDefault();
             const code = document.getElementById('promoCodeText').textContent.trim();
             const statusEl = document.getElementById('storeStatusMsg');
             statusEl.innerHTML = `Conectando con <strong>${storeName}</strong>... Tu código <strong>${code}</strong> (CLP $5.000) ha sido vinculado automáticamente.`;
